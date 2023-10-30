@@ -23,10 +23,17 @@ public class MemberService {
      */
     public Long join(Member member) {
         // 중복 회원 검증
-        validateDuplicateMember(member);
-        memberRepository.save(member);
+        long startTime = System.currentTimeMillis();
 
-        return member.getId();
+        try {
+            validateDuplicateMember(member);
+            memberRepository.save(member);
+            return member.getId();
+        } finally {
+            long endTime = System.currentTimeMillis();
+            long timeMs = endTime - startTime;
+            System.out.println("join : " + timeMs + "ms");
+        }
     }
 
     private void validateDuplicateMember(Member member) {
@@ -39,15 +46,29 @@ public class MemberService {
     /**
      * 전체 회원 조회
      */
-    public List<Member> findMembers(){
-        return memberRepository.findAll();
+    public List<Member> findMembers() {
+        long startTime = System.currentTimeMillis();
+        try {
+            return memberRepository.findAll();
+        } finally {
+            long endTime = System.currentTimeMillis();
+            long timeMs = endTime - startTime;
+            System.out.println("join : " + timeMs + "ms");
+        }
     }
 
     /**
      * 단일 회원 조회
      */
-    public Optional<Member> findOne(Long memberId){
-        return memberRepository.findById(memberId);
+    public Optional<Member> findOne(Long memberId) {
+        long startTime = System.currentTimeMillis();
+        try {
+            return memberRepository.findById(memberId);
+        } finally {
+            long endTime = System.currentTimeMillis();
+            long timeMs = endTime - startTime;
+            System.out.println("join : " + timeMs + "ms");
+        }
     }
 
 }
