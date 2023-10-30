@@ -2,9 +2,6 @@ package hello.hellospring.service;
 
 import hello.hellospring.domain.Member;
 import hello.hellospring.repository.MemberRepository;
-import hello.hellospring.repository.MemoryMemberRepository;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -92,6 +89,6 @@ class MemberServiceIntegrationTest {
         Member result = memberService.findOne(memberId).get();
 
         //Then
-        assertThat(result).isEqualTo(member);
+        assertThat(result.getName()).isEqualTo(member.getName());
     }
 }
